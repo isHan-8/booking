@@ -3,18 +3,22 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bookingRoutes = require('./routes/bookings'); // Assuming you put routes in a separate file
-
+require('dotenv').config();
 const app = express();
-const PORT = 5000;
+
+// Get the port from environment variables, default to 5000 if not set
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/booking', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 // Use booking routes
 app.use('/api/bookings', bookingRoutes);
