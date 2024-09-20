@@ -124,7 +124,7 @@ const UserBookingForm = ({ onRequestBooking, userNotification }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/bookings', {
+      const response = await axios.post('https://booking-am2x.vercel.app/api/bookings', {
         checkIn: userCheckIn,
         checkOut: userCheckOut,
         userId: '123', // Example user ID
@@ -191,7 +191,7 @@ const BookingForm = () => {
 
   const handleApproveBooking = async (request) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/bookings/approve', { requestId: request.id });
+      const response = await axios.post('https://booking-am2x.vercel.app/api/bookings/approve', { requestId: request.id });
       const message = response.data.message;
 
       // Update the status of the approved booking
